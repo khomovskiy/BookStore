@@ -1,0 +1,49 @@
+﻿<Window x:Class="BookStore.View.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BookStore"
+        xmlns:VMC="clr-namespace:BookStore.ViewModel"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Window.Resources>
+        <VMC:ViewModuleClass x:Key="VMClass"/>
+    </Window.Resources>
+    <Grid>
+        <ListView DataContext="{StaticResource VMClass}"
+                  ItemsSource="{Binding Store}"
+                  VerticalContentAlignment="Center"
+                  HorizontalContentAlignment="Left">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal" 
+                                Width="200"
+                                VerticalAlignment="Center"
+                                HorizontalAlignment="Left">
+                        <StackPanel Orientation="Vertical"
+                                        Width="200">
+                            <Label x:Name="BookTitle"
+                                       Content="{Binding Path=Title}"/>
+                            <Label x:Name="Pages"
+                                       Content="{Binding Path=Pages}"/>
+                            <ListBox ItemsSource="{Binding Authors}"
+                                     VerticalContentAlignment="Center"
+                                     HorizontalContentAlignment="Left">
+                                <ListBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Horizontal">
+                                            <Label Content="{Binding FirstName}"></Label>
+                                            <Label Content="{Binding LastName}"></Label>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ListBox.ItemTemplate>
+                            </ListBox>
+                        </StackPanel>
+
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </Grid>
+</Window>
